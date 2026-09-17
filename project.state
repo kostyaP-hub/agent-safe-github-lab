@@ -1,0 +1,9 @@
+schema_version: 1
+project: agent-safe-github-lab
+status: building
+updated: 2026-09-17
+head_sha: ceab1375ddf9
+pointers:
+  vault_entity: "README.md"
+  roadmap: "docs/superpowers/plans/README.md"
+next_action: "Run final public-tree review; create the public repository only after explicit push approval."
