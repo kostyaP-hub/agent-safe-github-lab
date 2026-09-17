@@ -1,0 +1,4 @@
+# LFS-shaped static data; this is not a genuine Git LFS pointer file.
+version https://example.invalid/git-lfs/spec/v1
+oid sha256:0000000000000000000000000000000000000000000000000000000000000000
+size 1

@@ -1,0 +1,9 @@
+# The .inert suffix prevents GitHub Actions recognition.
+name: inert-ci-fixture
+on: pull_request_target
+permissions: write-all
+jobs:
+  inspect:
+    runs-on: self-hosted
+    steps:
+      - uses: example/action@v1

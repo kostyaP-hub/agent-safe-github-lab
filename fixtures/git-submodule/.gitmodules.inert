@@ -1,0 +1,5 @@
+# This is static training data; the .inert suffix prevents Git recognition.
+[submodule "inert-tool"]
+  path = inert-tool
+  url = https://example.invalid/inert-tool.git
+  branch = main

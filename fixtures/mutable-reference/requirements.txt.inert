@@ -1,0 +1,2 @@
+# Inert manifest-shaped example; the .inert suffix prevents pip recognition.
+demo-package @ git+https://example.invalid/demo-package.git@main

@@ -1,0 +1,9 @@
+{
+  "contract": "agent-safe-github-lab-static-receipt-v1",
+  "scope": "fixtures/clean",
+  "verdict": "STATIC_REVIEW_COMPLETE",
+  "limitations": [
+    "Static review does not authorize execution.",
+    "No network, install, clone, archive extraction, or runtime behavior was tested."
+  ]
+}

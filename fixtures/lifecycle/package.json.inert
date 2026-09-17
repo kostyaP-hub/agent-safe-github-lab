@@ -1,0 +1,8 @@
+{
+  "_training_note": "The .inert suffix prevents npm recognition.",
+  "name": "inert-lifecycle-fixture",
+  "private": true,
+  "scripts": {
+    "postinstall": "echo inert-fixture-do-not-run"
+  }
+}
