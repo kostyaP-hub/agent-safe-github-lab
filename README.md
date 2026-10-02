@@ -1,5 +1,11 @@
 # Agent Safe GitHub Lab
 
+**English summary.** A learning lab on giving an AI agent a safe first contact with an external GitHub repo, skill, package, archive or web instruction. Instead of "trusting" the source, it builds a bounded **static receipt**: which risky signals were found, what is still unknown, and why this is *not* permission to run anything. It never downloads, clones, installs, executes code or makes network requests. The receipt contains only a category, relative path, line number and a content digest, never source lines.
+
+Quick start (Python 3.11+, standard library only): `python3 -m unittest discover -s tests -v`, then `python3 -m gate fixtures/clean --json`. Fixtures are intentionally suspicious but inert: scan them, never execute them. This is a teaching heuristic scanner, not a security boundary. Russian documentation follows.
+
+---
+
 Учебная лаборатория о том, как дать агенту безопасный первый контакт с внешним
 GitHub-репозиторием, skill, пакетом, архивом или веб-инструкцией.
 
