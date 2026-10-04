@@ -1,9 +1,9 @@
 schema_version: 1
 project: agent-safe-github-lab
 status: live
-updated: 2026-09-17
-head_sha: b1b3538f6d37
+updated: 2026-10-04
+head_sha: "ecddf4ba32c2"
 pointers:
   vault_entity: "README.md"
   roadmap: "docs/superpowers/plans/README.md"
-next_action: "Collect learner feedback; require review and tests before any change to the public safety standard."
+next_action: "Collect learner feedback on the documentation; require review and tests before changing the public safety standard."
