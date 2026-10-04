@@ -1,10 +1,33 @@
 # Agent Safe GitHub Lab
 
-**English summary.** A learning lab on giving an AI agent a safe first contact with an external GitHub repo, skill, package, archive or web instruction. Instead of "trusting" the source, it builds a bounded **static receipt**: which risky signals were found, what is still unknown, and why this is *not* permission to run anything. It never downloads, clones, installs, executes code or makes network requests. The receipt contains only a category, relative path, line number and a content digest, never source lines.
+![Приёмная Механикус: осмотр внешнего источника, отчёт и отдельное ревью](docs/assets/lab-cover.png)
 
-Quick start (Python 3.11+, standard library only): `python3 -m unittest discover -s tests -v`, then `python3 -m gate fixtures/clean --json`. Fixtures are intentionally suspicious but inert: scan them, never execute them. This is a teaching heuristic scanner, not a security boundary. Russian documentation follows.
+![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB)
+![Standard library](https://img.shields.io/badge/dependencies-stdlib_only-6B8E6B)
+[![Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-D5A65B)](LICENSE)
 
----
+**Сначала изучи источник. Зафиксируй находки. Решение о запуске принимай отдельно.**
+
+Практическая учебная лаборатория для людей, работающих с AI-агентами.
+На инертных примерах разбираем, как внешние инструкции, зависимости и CI
+могут изменить цель агента или открыть доступ к данным.
+
+[Быстрый старт](#быстрый-старт) · [Упражнения](#пять-практических-упражнений) ·
+[Модель угроз](docs/THREAT_MODEL.md) · [English](docs/overview.en.md)
+
+## Осмотр → отчёт → ревью
+
+| Шаг | Что происходит |
+|---|---|
+| **Осмотр** | Локальный scanner читает выбранный каталог и ищет опасные признаки |
+| **Отчёт** | Receipt сохраняет категории, относительные пути, номера строк и digest |
+| **Ревью** | Человек оценивает находки, пробелы и условия дальнейшего допуска |
+
+Обложка показывает приёмную кузни Адептус Механикус: внешний груз исследуют
+до открытия ворот. Мягкая рисованная подача подчёркивает обучение и внимательность.
+[Об иллюстрации](docs/art-direction.md).
+
+## Что делает лаборатория
 
 Учебная лаборатория о том, как дать агенту безопасный первый контакт с внешним
 GitHub-репозиторием, skill, пакетом, архивом или веб-инструкцией.
@@ -30,8 +53,15 @@ receipt автоматически: сначала проверьте его к�
 ```sh
 python3 -m unittest discover -s tests -v
 python3 -m gate fixtures/clean --json
+```
+
+Затем сравните с подозрительным примером:
+
+```sh
 python3 -m gate fixtures/second-stage --json
 ```
+
+Для этого примера код возврата `1` ожидаем: он сообщает о находках, требующих ревью.
 
 Сканируйте только каталог нужного упражнения. Никогда не выполняйте его файлы:
 они намеренно содержат подозрительные, но инертные фрагменты текста.
@@ -45,6 +75,26 @@ python3 -m gate fixtures/second-stage --json
 - видеть lifecycle scripts пакетов как сигнал к отдельному допуску;
 - повторно проверять источник, когда меняются commit, URL, зависимости,
   permissions или инструмент.
+
+## Пять практических упражнений
+
+| Упражнение | Что разбираем |
+|---|---|
+| [1. Receipt вместо доверия](exercises/01-static-receipt.md) | Чистый источник и prompt injection; границы статической проверки |
+| [2. Вторая стадия и эксфильтрация](exercises/02-second-stage-egress.md) | Догрузки, mutable refs и цепочка «секрет → сеть» |
+| [3. CI и lifecycle](exercises/03-ci-and-lifecycle.md) | Привилегии workflow и исполнение при установке |
+| [4. Повторный допуск](exercises/04-re-admission.md) | Что пересматривать при изменении источника |
+| [5. Скрытые источники](exercises/05-hidden-sources.md) | Submodules, LFS, build sources и обфускация |
+
+## Читать результат
+
+| Verdict | Exit code | Как понимать |
+|---|---|---|
+| `STATIC_REVIEW_COMPLETE` | `0` | Ограниченный статический осмотр завершён; запуск отдельно |
+| `REVIEW_REQUIRED` | `1` | Нужен разбор найденных признаков или неполного покрытия |
+| `STOP` | `1` | Найдены признаки, останавливающие дальнейший допуск |
+
+Ошибка входных данных CLI возвращает `2`. Исходные строки в receipt не копируются.
 
 ## Границы
 
